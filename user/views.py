@@ -42,11 +42,13 @@ class CreateUserView(generics.CreateAPIView):
 # class UserViewSet(viewsets.ModelViewSet):
 #     serializer_class = UserSerializer
 #     queryset = User.objects.all()
-    
+#     authentication_classes = (TokenAuthentication,)
+#     permissions_classes = (IsAuthenticated,)
 
 #     def set_password(self, request, pk=None):
 #         user = self.get_object()
 #         serializer = serializer_class(data=request.data)
+        
 #         if serializer.is_valid():
 #             user.set_password(serializer.data['password'])
 #             user.save()
