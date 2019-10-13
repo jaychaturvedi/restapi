@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-8">
+        <p>
+            <div class="float-left"><h3>List of User</h3></div>
+            {% if request.user.role == "Admin" %}
+            <a class="btn btn-success float-right" href="{%  url 'user_add' %}">Add user</a>
+            {% endif %}
+        </p>
+        <div class="table-responsive-sm">
+        {% if users %}
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Name</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <th scope="row">
+                            {{user.username}}
+                            <span class="badge badge-default">{{user.email}}</span>
+                            <span class="badge badge-default">{{user.role}}</span>
+
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-primary" href="{%  url 'user_details' user.id %}">Details</a>
+                            {% if request.user.role == "Admin" %}
+                            <a class="btn btn-warning" href="{%  url 'user_edit' user.id %}">Edit</a>
+                            <a class="btn btn-danger" href="{%  url 'user_delete' user.id %}">Delete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+        {% else %}
+            <p>There is no user available.</p>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

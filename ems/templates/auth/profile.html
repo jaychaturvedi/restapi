@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<br>
+<h4>My Profile</h4>
+    <table class="table table-light table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>User Name</th>
+                <td>{{user.username}}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{user.contact}}</td>
+            </tr>
+            <tr>
+                <th>Email Id</th>
+                <td>{{user.email}}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{user.city}}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{user.address}}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% if request.user.role == "Admin" %}
+    <div class="text-right">
+        <a class="btn btn-warning" href="{%  url 'user_edit' object.user.id %}">Edit Profile</a>
+    </div>
+    {% endif %}
+{% endblock content %}
