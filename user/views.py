@@ -10,13 +10,34 @@ from django.urls import reverse_lazy
 from user.forms import UserForm
 from user.models import Profile
 from rest_framework import viewsets
-from user.serializers import UserSerializer 
-User = get_user_model()
 
 #restAPI -- class viewset
-class UserViewSet(viewsets.ModelViewSet):
+from rest_framework import generics
+from user.serializers import UserSerializer
+User = get_user_model()
+
+
+class CreateUserView(generics.CreateAPIView):
+    """Create a new user in the system"""
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+
+# class UserViewSet(viewsets.ModelViewSet):
+#     serializer_class = UserSerializer
+#     queryset = User.objects.all()
+    
+
+#     def set_password(self, request, pk=None):
+#         user = self.get_object()
+#         serializer = serializer_class(data=request.data)
+#         if serializer.is_valid():
+#             user.set_password(serializer.data['password'])
+#             user.save()
+#             return Response({'status': 'password set'})
+#         else:
+#             return Response(serializer.errors,
+#                             status=status.HTTP_400_BAD_REQUEST)
 
 def index(request):
     return HttpResponseRedirect(reverse('user_list'))

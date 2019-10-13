@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from user.models import Profile
 from .forms import UserForm
@@ -20,20 +19,24 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('username', 'admin')
     list_filter = ('admin',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ()}),
-        ('Permissions', {'fields': ('admin',)}),
+        ('Permissions', {'fields': (
+                'is_active',
+                'is_staff',
+                'is_superuser',
+            )}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username','password')}
+            'fields': ('username','password')},
         ),
     )
     search_fields = ('username',)
-    ordering = ('username',)
+    ordering = ('id',)
     filter_horizontal = ()
 
 

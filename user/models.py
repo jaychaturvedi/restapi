@@ -3,14 +3,14 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import (
-    AbstractBaseUser, BaseUserManager
+    AbstractBaseUser, BaseUserManager, PermissionsMixin
 )
 
 
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None, is_active=True, is_staff=False, is_admin=False):
         if not username:
-            raise ValueError("Users must have an email address")
+            raise ValueError("Users must have an username")
         if not password:
             raise ValueError("Users must have a password")
         user_obj = self.model(
