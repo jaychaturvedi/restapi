@@ -13,6 +13,7 @@ from rest_framework import routers
 app_name = 'user'
 
 urlpatterns = [
+    path('me/', ManageUserView.as_view(), name='me'),
     path('create/',CreateUserView.as_view(), name='create'),
     path('token/',CreateTokenView.as_view(), name='token'),
 ]
