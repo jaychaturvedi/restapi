@@ -1,1 +1,1 @@
-Crud operation on Django Custom User model
+Crud operation on User model using rest api
